@@ -5,7 +5,13 @@ const initialState = {
   isFetching: false,
   isFetched: false,
   isFailure: false,
+  perPagelimit: 3,
+  pageNo: 1,
+  totalCount: 20,
 };
+// const indexOfLastPost = perPagelimit * pageNo; //  10* 3 = 30
+// const indexOfFirstPost = indexOfLastPost - perPagelimit; //30-10= 20
+// const sliceShow = data.slice(indexOfFirstPost, indexOfLastPost);
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.FETCH_ITEMS_REQUEST: {
@@ -31,6 +37,21 @@ export default function reducer(state = initialState, action) {
         isFailure: true,
       };
     }
+    case actions.INCREMENT_PAGE_NO: {
+      const { pageNo } = action;
+      return {
+        ...state,
+        pageNo: pageNo,
+      };
+    }
+    case actions.DECREMENT_PAGE_NO: {
+      const { pageNo } = action;
+      return {
+        ...state,
+        pageNo: pageNo,
+      };
+    }
+
     default:
       return state;
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import { navigate } from "@reach/router";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +9,16 @@ import ProductDiscription from "../CommonComponent/ProductDiscription";
 import useItemData from "../useItemData";
 
 const ProductDetails = (props) => {
+  const itemsData = useSelector((state) => {
+    return {
+      state,
+    };
+  });
+  console.log("itemsData", itemsData);
+  const itemsData2 = useItemData();
+
   const { id } = props;
-  const itemsData = useItemData();
+  //const itemsData = useItemData();
 
   function findProduct(passId) {
     return itemsData?.state?.data?.find((element) => {
@@ -29,8 +38,15 @@ const ProductDetails = (props) => {
       >
         <FontAwesomeIcon icon={faBackward} style={{ fontSize: "22px" }} />
       </h3>
-      {itemsData?.state?.data && (
+      {/* {itemsData?.state?.data && (
         <ProductDiscription props={props} selectedProduct={selectedProduct} />
+      )} */}
+      {itemsData?.state?.data === null && itemsData2?.state?.data ? (
+        <ProductDiscription props={props} selectedProduct={selectedProduct} />
+      ) : (
+        itemsData?.state?.data && (
+          <ProductDiscription props={props} selectedProduct={selectedProduct} />
+        )
       )}
     </div>
   );
