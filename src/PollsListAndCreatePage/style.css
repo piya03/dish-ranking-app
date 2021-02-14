@@ -1,0 +1,33 @@
+.createPollContainer{
+    text-align: center;
+    color: #e18c86;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.pollQuestion{
+   
+    max-width: 300px;
+    margin: auto;
+}
+.polls-list-container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.active-poll-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.poll-item {
+    height: 50px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background: #fbede6;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

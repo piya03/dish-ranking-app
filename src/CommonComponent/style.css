@@ -1,104 +1,54 @@
-.cardContainer{
-    width: 300px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+.inputBox{
+  position: relative;
+  height: 80px;
 }
-.cardContainer:hover {
-    box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
-}
-
-.cardContainer:hover .image-section {
-    transform: scale(.9);
-}
-.forBg{
-    background: linear-gradient(157deg, #d6ecf2 58%,white 58% 27%);
-    border-radius:  10px 10px 0px 0px;
-}
-.image-section{
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    transition: transform .3s;
-}
-.image-section img {
-    box-shadow: 0px 0px 5px grey;
-}
-.info {
-    margin-top: 50px;
-    font-size: 18px;
-    font-family: sans-serif;
-    color: #212B34;
-}
-.task {
-    color: #44484f;
-}
-.complete{
-    border-right: 1px solid #867f7f;
-    padding-right: 20px;
+.inputLable{
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  z-index: 1;
+  background-color: white;
+  padding: 0px 2px;
+  color :#6b6b6b
 }
 
+.input{
+  position: absolute;
+  padding:4px 8px 4px 16px;
+  min-width: 300px;
+  border-radius: 5px;
+  border: 1px solid;
+  height: 52px;
+  font-size: 16px;
+  border: 1px solid #a88ef2;
+}
 
- 
-  .animation {
-    transform: translateY(0%);
-  }
-  
-  .background_transparent {
-    background: transparent;
-    height: 0px;
-  }
- 
-    .bg-color {
-        background-color: aliceblue
-    }
- .info-icon {
-        color: green
-    }
+/* /////////logout css */
+.logoutContainer{
+  background: white;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #DCE9F5;
+  padding: 5px;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+    position: fixed;
+    top: 0;
+}
 
-  .detailsContainer {
-    display: grid;
-    grid-template-columns: 30% 65%;
-    background: aliceblue;
-    grid-gap: 20px;
-    padding: 20px;
-    width: 80%;
-    margin: auto;
-  }
-
- .categories{
-    background: #0da7b1;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    margin-right: 10px;  
-      width: fit-content;
-
- }
- .categoriesContainer{
-    display: grid;
-    grid-gap: 10px;
-    align-items: center;
-    text-align: center;
-    margin: 12px 0px;
- }
-
-    /* /////////////// */
-    @media only screen and (max-width: 975px) {
-        .cardContainer {
-      max-width: 350px;
-      margin: auto;
-      
-        }
-        }
- 
-        @media only screen and (max-width: 600px) {
-          .detailsContainer {
-            grid-template-columns: 100%;
-            margin-bottom: 100px;
-
-          }
-          .product-img-container{
-            min-height: 300px;
-          }
-          }
+/* ///btn */
+.logInbtn{
+  background: #7c57f6;
+  color: white;
+  width: 100%;
+  border-radius: 18px;
+  height: 35px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+.logInbtn:hover {
+  background-color: #a38af6;
+}

@@ -1,77 +1,55 @@
-import { navigate } from "@reach/router";
+import { Router, navigate } from "@reach/router";
+import PollsListAndCreatePage from "../PollsListAndCreatePage";
+import Poll from "../Poll";
+
 import React, { useState } from "react";
-import Card from "../CommonComponent/Card";
-import useItemData from "./../useItemData";
+import Login from "../LogIn/Login";
+
 import { useDispatch, useSelector } from "react-redux";
-import * as actions from "./../actionTypes";
-
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const itemsData = useItemData();
-  const pageNo = itemsData.state.pageNo;
-  const perPagelimit = itemsData.state.perPagelimit;
-  // const [pageNo, setPageNo] = useState(1);
-  // const [perPagelimit, setPerPagelimit] = useState(3);
-  const indexOfLastPost = perPagelimit * pageNo; //  10* 3 = 30
-  const indexOfFirstPost = indexOfLastPost - perPagelimit; //30-10= 20
+  const activeUserFromStore = useSelector((state) => state.activeuser.username);
 
-  const sliceShow = itemsData?.state?.data
-    ? itemsData?.state?.data?.slice(indexOfFirstPost, indexOfLastPost)
-    : [];
+  // const dispatch = useDispatch();
+  // const itemsData = useItemData();
+  // const pageNo = itemsData.state.pageNo;
+  // const perPagelimit = itemsData.state.perPagelimit;
+  // // const [pageNo, setPageNo] = useState(1);
+  // // const [perPagelimit, setPerPagelimit] = useState(3);
+  // const indexOfLastPost = perPagelimit * pageNo; //  10* 3 = 30
+  // const indexOfFirstPost = indexOfLastPost - perPagelimit; //30-10= 20
 
-  const totalPage = Math.ceil(itemsData?.state?.totalCount / perPagelimit);
+  // const sliceShow = itemsData?.state?.data
+  //   ? itemsData?.state?.data?.slice(indexOfFirstPost, indexOfLastPost)
+  //   : [];
+
+  // const totalPage = Math.ceil(itemsData?.state?.totalCount / perPagelimit);
+  const isLoggedIn = Boolean(activeUserFromStore);
+  console.log("HomePage -> isLoggedIn", isLoggedIn);
+
+  if (isLoggedIn) {
+    navigate("/polls");
+  }
 
   return (
-    <div>
-      <React.Fragment>
-        <div className="App">
-          {sliceShow?.map((each, index) => {
-            return (
-              <Card
-                key={index}
-                each={each}
-                handleOnClick={() => {
-                  navigate(`productdetails/${each?.id}`);
-                }}
-              />
-            );
-          })}
-          <div>
-            <button
-              onClick={() => {
-                // if (pageNo !== 1) setPageNo((page) => page - 1);
-                if (pageNo > 1) {
-                  dispatch({
-                    type: actions.DECREMENT_PAGE_NO,
-                    pageNo: itemsData?.state?.pageNo - 1,
-                  });
-                }
-              }}
-              className="cursor-pointer"
-            >
-              prev
-            </button>
-            <button
-              onClick={() => {
-                // if (sliceShow.length && totalPage !== pageNo) {
-                //   setPageNo((page) => page + 1);
-                // } else {
-                //   setPageNo(1);
-                // }
-                if (itemsData?.state?.pageNo + 1 <= totalPage) {
-                  dispatch({
-                    type: actions.INCREMENT_PAGE_NO,
-                    pageNo: itemsData?.state?.pageNo + 1,
-                  });
-                }
-              }}
-              className="corsor-pointer ml-4"
-            >
-              next
-            </button>
-          </div>
+    <div
+      style={{
+        height: "100%",
+      }}
+    >
+      {!isLoggedIn && <Login />}
+
+      {isLoggedIn && (
+        <div
+          style={{
+            paddingTop: "60px",
+          }}
+        >
+          <Router>
+            <Poll path="polls/:pollId" />
+            <PollsListAndCreatePage path="polls" />
+          </Router>
         </div>
-      </React.Fragment>
+      )}
     </div>
   );
 };
