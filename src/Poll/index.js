@@ -218,7 +218,7 @@ const Poll = ({ pollId }) => {
   }
 
   return (
-    <div className="p-3">
+    <div className="p-3" style={{ maxWidth: "450px", margin: "0px auto" }}>
       {activeScreen > 1 && (
         <BackBtn
           onClick={() => {

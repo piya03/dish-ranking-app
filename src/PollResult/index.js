@@ -56,7 +56,7 @@ const PollResult = ({ pollId }) => {
   });
 
   return (
-    <div className="p-3">
+    <div className="p-3" style={{ maxWidth: "450px", margin: "0px auto" }}>
       <BackBtn
         onClick={() => {
           navigate("/polls");
