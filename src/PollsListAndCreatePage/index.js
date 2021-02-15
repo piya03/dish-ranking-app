@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import "./style.css";
-import Logout from "../CommonComponent/Logout";
 import CreatePoll from "./CreatePoll";
 import CommonBtn from "../CommonComponent/CommonBtn";
 import { v4 as uuidv4 } from "uuid";
-import { CREATE_POLL } from "./../reducers/polls.reducer";
+import { CREATE_POLL, SET_ACTIVE_POLL_ID } from "./../reducers/polls.reducer";
 import CommonInput from "../CommonComponent/CommonInput";
-
 import { useDispatch, useSelector } from "react-redux";
 import { navigate } from "@reach/router";
 
@@ -19,16 +17,10 @@ function PollsListAndCreatePage(props) {
   const dispatch = useDispatch();
 
   function submitPollQuestion() {
-    if (!question) {
+    if (!question.trim()) {
       return;
     }
-    console.log("submitPollQuestion");
-    // localStorage.setItem(
-    //   "activeUser",
-    //   JSON.stringify({
-    //     username: "",
-    //   })
-    // );
+
     dispatch({
       type: CREATE_POLL,
       pollId: uuidv4(),
@@ -38,12 +30,9 @@ function PollsListAndCreatePage(props) {
     });
     setPollQuestion(false);
     setQuestion("");
-
-    //uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
   }
   return (
     <>
-      <Logout />
       {!showPollQuestion && (
         <div
           className="createPollContainer"
@@ -54,7 +43,7 @@ function PollsListAndCreatePage(props) {
       )}
       {showPollQuestion && (
         <>
-          <div className="pollQuestion">
+          <div className="pollQuestion mt-4">
             <CommonInput
               label="Question Title"
               value={question}
@@ -69,7 +58,7 @@ function PollsListAndCreatePage(props) {
               margin: "auto",
             }}
           >
-            <CommonBtn text=" SUBMIT" handleClick={submitPollQuestion} />{" "}
+            <CommonBtn text=" SUBMIT" handleClick={submitPollQuestion} />
           </div>
         </>
       )}
@@ -81,14 +70,35 @@ function PollsListAndCreatePage(props) {
             {pollsDataInStore &&
               pollsDataInStore.map((each) => {
                 return (
-                  <div
-                    className="poll-item"
-                    key={each.pollId}
-                    onClick={() => {
-                      navigate(`polls/${each.pollId}`);
-                    }}
-                  >
-                    {each.question}
+                  <div>
+                    <div
+                      className="poll-item"
+                      key={each.pollId}
+                      onClick={() => {
+                        navigate(`polls/${each.pollId}`);
+                      }}
+                    >
+                      {each.question}
+                    </div>
+                    <div
+                      style={{
+                        width: "150px",
+                        margin: "auto",
+                        marginBottom: "30px",
+                      }}
+                    >
+                      <CommonBtn
+                        passStyle={{
+                          color: "#000",
+                          background: " #e2dafc",
+                          marginTop: "0px",
+                        }}
+                        text=" View Results"
+                        handleClick={() => {
+                          navigate(`polls/results/${each.pollId}`);
+                        }}
+                      />
+                    </div>
                   </div>
                 );
               })}

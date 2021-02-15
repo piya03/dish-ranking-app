@@ -7,7 +7,7 @@
 .pollQuestion{
    
     max-width: 300px;
-    margin: auto;
+    margin: 20px auto;
 }
 .polls-list-container {
     padding-left: 20px;
@@ -30,4 +30,6 @@
     border-radius: 20px;
     font-weight: bold;
     margin-bottom: 20px;
+    cursor: pointer;
 }
+

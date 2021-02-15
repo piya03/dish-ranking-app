@@ -68,16 +68,6 @@ function CommonInput({
           onBlur={onBlurFun}
         />
       </div>
-      {/* {error && (
-        <p
-          className="absolute bottom-0 text-sm"
-          style={{
-            color: "#d91212",
-          }}
-        >
-          Required
-        </p>
-      )} */}
     </div>
   );
 }

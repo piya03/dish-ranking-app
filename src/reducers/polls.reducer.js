@@ -10,63 +10,11 @@ const initialState = {
   activePollId: "",
 };
 
-// const indexOfLastPost = perPagelimit * pageNo; //  10* 3 = 30
-// const indexOfFirstPost = indexOfLastPost - perPagelimit; //30-10= 20
-// const sliceShow = data.slice(indexOfFirstPost, indexOfLastPost);
-
-const SET_ACTIVE_USER = "SET_ACTIVE_USER";
-
 export const CREATE_POLL = "CREATE_POLL";
 
 export const SUBMIT_POLL_INFO = "SUBMIT_POLL_INFO";
 
-// {
-//     username: "anil",
-//     uploadedDishes: [
-//       {
-//         answerId: "uuid create",
-//         lasUpdated: "12-03-56",
-//         answerArray: [
-//           {
-//             type: "image",
-//             key: "image",
-//             value: "https://sdada.com.a.jpg",
-//           },
-//           {
-//             type: "string",
-//             key: "details",
-//             value: "Biaigan ka bharta is delicious",
-//           },
-//           {
-//             type: "string",
-//             key: "name",
-//             value: "Biaigan ka bharta",
-//           },
-//         ],
-//       },
-//       {
-//         answerId: "uuid create",
-//         lasUpdated: "12-03-56",
-//         answerArray: [
-//           {
-//             type: "image",
-//             key: "image",
-//             value: "https://sdada.com.a.jpg",
-//           },
-//           {
-//             type: "string",
-//             key: "details",
-//             value: "Biaigan ka bharta is delicious",
-//           },
-//           {
-//             type: "string",
-//             key: "name",
-//             value: "Biaigan ka bharta",
-//           },
-//         ],
-//       },
-//     ],
-//   },
+export const SET_ACTIVE_POLL_ID = "SET_ACTIVE_POLL_ID";
 
 export default function poll(state = initialState, action) {
   switch (action.type) {
@@ -89,17 +37,40 @@ export default function poll(state = initialState, action) {
       return newObj;
     }
 
+    case SET_ACTIVE_POLL_ID: {
+      const { pollId } = action;
+      return {
+        ...state,
+        activePollId: pollId,
+      };
+    }
     case SUBMIT_POLL_INFO: {
-      //     const {data} = action
+      const { data, activePollId, username } = action;
 
-      //     const { username } = data
+      const indexPoll = state.polls.findIndex((each) => {
+        return each.pollId === activePollId;
+      });
+      if (indexPoll !== -1) {
+        const pollData = { ...state.polls[indexPoll] };
 
-      //   return {
-      //     ...state,
-      //    polls: [...state.polls, {
-      //        pollId: pollId,
-      //    }]
-      //   };
+        if (pollData.pollInfo) {
+          pollData.pollInfo[username] = data;
+        } else {
+          pollData.pollInfo = {};
+          pollData.pollInfo[username] = data;
+        }
+
+        const newPolls = [...state.polls];
+        newPolls[indexPoll] = pollData;
+
+        const newState = {
+          ...state,
+          polls: newPolls,
+        };
+        localStorage.setItem("polls", JSON.stringify(newState.polls));
+        return newState;
+      }
+
       return state;
     }
 

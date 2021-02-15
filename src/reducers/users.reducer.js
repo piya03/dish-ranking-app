@@ -42,9 +42,6 @@ const initialState = {
     },
   ],
 };
-// const indexOfLastPost = perPagelimit * pageNo; //  10* 3 = 30
-// const indexOfFirstPost = indexOfLastPost - perPagelimit; //30-10= 20
-// const sliceShow = data.slice(indexOfFirstPost, indexOfLastPost);
 
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { navigate } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,8 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   function logOutFun() {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem("activeUser");
     dispatch({
       type: SET_ACTIVE_USER,
       username: "",
@@ -18,7 +19,10 @@ const Logout = () => {
   }
   return (
     <div className="logoutContainer">
-      <div className="flex items-center">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => navigate("/polls")}
+      >
         <FontAwesomeIcon icon={faUserCircle} className="user-icon mr-2" />
         <p>{activeUserFromStore}</p>
       </div>
