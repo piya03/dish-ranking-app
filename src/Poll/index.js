@@ -13,24 +13,6 @@ import { navigate } from "@reach/router";
 const Poll = ({ pollId }) => {
   const url = "https://api.cloudinary.com/v1_1/img24/upload";
 
-  // screens Data
-  // "first image upload screen", "Second image upload screen", "top 3 dish selection screen", "ranking dish screen"]
-  //  [ {
-  //    imgUrl:
-  //    file:
-  //    discription,
-  //    title,
-  //  }, {
-  //   imgUrl:
-  //   file:
-  //   discription,
-  //   title
-  // }, {
-  //   selected : ["sdads", "sdadsad", "sadsads"]
-  // }, {
-  //   rankorder: ["sdadsad", "sdads", "sadsads"]
-  // }  ]
-
   const activeUserFromStore = useSelector((state) => state.activeuser.username);
 
   // activeUserFromStore
@@ -212,44 +194,6 @@ const Poll = ({ pollId }) => {
         });
 
         navigate("/polls");
-        // localStorage.setItem
-        //  {
-        //    "anil": {
-
-        //    }
-        //  }
-        //
-        // {
-        //   pollid: "sdadf8797dsaddf987",
-        //   pollsAnswer: [
-        //     {
-        //       username: "anil",
-        //       uploadedDishes: [
-        //         {
-        //           answerId: "uuid create",
-        //           lasUpdated: "12-03-56",
-        //           answerArray: [
-        //             {
-        //               type: "image",
-        //               key: "image",
-        //               value: "https://sdada.com.a.jpg",
-        //             },
-        //             {
-        //               type: "string",
-        //               key: "details",
-        //               value: "Biaigan ka bharta is delicious",
-        //             },
-        //             {
-        //               type: "string",
-        //               key: "name",
-        //               value: "Biaigan ka bharta",
-        //             },
-        //           ],
-        //         },
-        //       ],
-        //     },
-        //   ],
-        // }
       }
       default:
         return;

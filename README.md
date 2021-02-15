@@ -1,3 +1,4 @@
+# Dish Rank App
 
 # Steps to run:
 
