@@ -64,11 +64,17 @@ const DishCard = ({
           <div className="arrow-up-down flex">
             <FontAwesomeIcon
               icon={faArrowUp}
+              style={{
+                width: "25px",
+              }}
               className=" mr-2 cursor-pointer arrow-icon w-20"
               onClick={moveUpFun}
             />
             <FontAwesomeIcon
               icon={faArrowDown}
+              style={{
+                width: "25px",
+              }}
               className=" mr-2 cursor-pointer arrow-icon w-20"
               onClick={moveDownFun}
             />
