@@ -14,7 +14,12 @@ const HomePage = () => {
   return (
     <div
       style={{
-        height: "100%",
+        height: "100vh",
+        position: "fixed",
+        left: "0",
+        top: "0",
+        right: "0",
+        overflow: "auto",
       }}
     >
       {!isLoggedIn && <Login />}

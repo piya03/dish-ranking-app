@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DishCard from "./DishCard";
 
 const DishRankingUI = ({ data, onChangeOrder, order, selectedArray }) => {
@@ -35,6 +35,16 @@ const DishRankingUI = ({ data, onChangeOrder, order, selectedArray }) => {
       })
       .filter(Boolean);
   }
+
+  useEffect(() => {
+    onChangeOrder(finalData.map((each) => each.id));
+  }, []);
+  // useEffect(() => {
+
+  //   return () => {
+  //     // onChangeOrder(finalData.map((each) => each.id));
+  //   }
+  // }, [])
 
   return (
     <div>
