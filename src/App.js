@@ -4,6 +4,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 import HomePage from "./HomePage";
 import Logout from "./CommonComponent/Logout";
+import { activeuser } from "./reducers";
 
 function App() {
   return (

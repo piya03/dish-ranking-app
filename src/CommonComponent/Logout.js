@@ -26,9 +26,11 @@ const Logout = () => {
         <FontAwesomeIcon icon={faUserCircle} className="user-icon mr-2" />
         <p>{activeUserFromStore}</p>
       </div>
-      <p onClick={logOutFun} className="cursor-pointer">
-        Logout
-      </p>
+      {activeUserFromStore && (
+        <p onClick={logOutFun} className="cursor-pointer">
+          Logout
+        </p>
+      )}
     </div>
   );
 };
