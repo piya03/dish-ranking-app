@@ -12,6 +12,8 @@
 .polls-list-container {
     padding-left: 20px;
     padding-right: 20px;
+    max-width: 300px;
+    margin: 0px auto;
 }
 
 .active-poll-label {
