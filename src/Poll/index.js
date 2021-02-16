@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Loader from "../CommonComponent/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { SUBMIT_POLL_INFO } from "../reducers/polls.reducer";
 import CommonBtn from "../CommonComponent/CommonBtn";
@@ -96,6 +97,11 @@ const Poll = ({ pollId }) => {
 
   const dispatch = useDispatch();
 
+  const [apiState, setApiState] = React.useState({
+    isFetching: false,
+    isFetched: false,
+    isFailure: false,
+  });
   async function onClickNextOrSubmit() {
     switch (activeScreen) {
       case 1: {
@@ -154,6 +160,13 @@ const Poll = ({ pollId }) => {
         let uploadedFirstImageUrl = "";
         let uploadedSecondImageUrl = "";
 
+        setApiState({
+          ...apiState,
+          isFetching: true,
+          isFetched: false,
+          isFailure: false,
+        });
+
         if (needToUploadFirstOne) {
           const response = await uploadFileFun(screensData[0]?.file);
           if (response) {
@@ -183,6 +196,26 @@ const Poll = ({ pollId }) => {
           screensData[1].file = null;
         }
 
+        if (
+          (needToUploadSecondOne && uploadedSecondImageUrl) ||
+          (needToUploadFirstOne && uploadedFirstImageUrl)
+        ) {
+          setApiState({
+            ...apiState,
+            isFetching: false,
+            isFetched: true,
+            isFailure: false,
+          });
+        }
+
+        if (!needToUploadSecondOne && !needToUploadFirstOne) {
+          setApiState({
+            ...apiState,
+            isFetching: false,
+            isFetched: true,
+            isFailure: false,
+          });
+        }
         // data, activePollId, username
         // SUBMIT_POLL_INFO
 
@@ -323,7 +356,15 @@ const Poll = ({ pollId }) => {
         }}
       >
         <CommonBtn
-          text={activeScreen === 4 ? "Submit Poll" : "Next"}
+          text={
+            apiState.isFetching ? (
+              <Loader />
+            ) : activeScreen === 4 ? (
+              "Submit Poll"
+            ) : (
+              "Next"
+            )
+          }
           handleClick={onClickNextOrSubmit}
         />
       </div>{" "}
