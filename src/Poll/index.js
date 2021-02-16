@@ -356,6 +356,7 @@ const Poll = ({ pollId }) => {
         }}
       >
         <CommonBtn
+          disabled={apiState.isFetching ? true : false}
           text={
             apiState.isFetching ? (
               <Loader />
